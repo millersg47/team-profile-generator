@@ -5,11 +5,11 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
-function initQuestions(){
+function starterQuestions(){
     const questionsArr = [{
         type: "input",
         message: "What is the employee's full name?",
-        name: "full-name"
+        name: "fullname"
     }, {
         type: "input",
         message: "What is the employee's ID?",
@@ -27,15 +27,6 @@ function initQuestions(){
 
     inquirer
         .prompt(questionsArr)
-        .then(function() {
-            if(role === "Manager") {
-                mangrQuestions()
-            } else if(role === "Engineer") {
-                engQuestions()
-            } else if(role === "Intern") {
-                intQuestions()
-            }
-        })
 }
 
 function mangrQuestions() {
@@ -75,7 +66,42 @@ function intQuestions() {
         .then()
 }
 
-function getTeam() {
-    
+function handleResponses() {
+    let newEmployee;
+
+
 }
+
+function getTeam() {
+    const employeeArr = [];
+
+    starterQuestions()
+        .then(function() {
+            if(role === "Manager") {
+                mangrQuestions()
+                    .then(function(){
+                        let newMngr = new Manager(fullname, id, email, role, office);
+                        employeeArr.push(newMngr);
+                        console.log(employeeArr);
+                    })
+            } else if(role === "Engineer") {
+                engQuestions()
+                .then(function(){
+                    let newEng = new Engineer(fullname, id, email, role, github);
+                    employeeArr.push(newEng);
+                    console.log(employeeArr);
+                })
+            } else if(role === "Intern") {
+                intQuestions()
+                .then(function(){
+                    let newInt = new Intern(fullname, id, email, role, school);
+                    employeeArr.push(newInt);
+                    console.log(employeeArr);
+                })
+            }
+        })
+
+}
+
+getTeam();
 
