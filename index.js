@@ -1,9 +1,20 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+
+const starterHtml = require("./src/starter_html");
+const managerHtml = require("./src/manager_html");
+const engineerHtml = require("./src/engineer_html");
+const internHtml = require("./src/intern_html");
+const closingHtml = require("./src/closing_html");
+
+const employeeArr = [];
+
+getTeam();
 
 function starterQuestions(){
     const questionsArr = [
@@ -28,7 +39,38 @@ function starterQuestions(){
 
     return inquirer
         .prompt(questionsArr)
-    
+}
+
+function checkRole(role) {
+    if(role === "Manager") {
+        mngrQuestions()
+            .then(addNewMngr(answers))
+            .then(addAnother())
+    } else if(role === "Engineer") {
+        engQuestions()
+        .then(addNewEng(answers))
+        .then(addAnother())
+    } else if(role === "Intern") {
+        intQuestions()
+        .then(addNewInt(answers))
+        .then(addAnother())
+    }
+}
+
+function addAnother() {
+    const lastQuestionArr = [{
+        name: "teambuilder",
+        message: "Would you like to add another team member?",
+        type: "confirm"
+    }]
+    return inquirer
+        .prompt(lastQuestionArr)
+        .then((confirmed) => {
+            starterQuestions();
+        },
+        (cancelled) => {
+            renderTeam();
+        })
 }
 
 function mngrQuestions() {
@@ -38,9 +80,8 @@ function mngrQuestions() {
         name: "office"
     }]
 
-    inquirer
+    return inquirer
         .prompt(mngrQuestionsArr)
-        .then()
 }
 
 function engQuestions() {
@@ -50,9 +91,8 @@ function engQuestions() {
         name: "github"
     }]
 
-    inquirer
+    return inquirer
         .prompt(engQuestionsArr)
-        .then()
 }
 
 
@@ -63,47 +103,49 @@ function intQuestions() {
         name: "school"
     }]
 
-    inquirer
+    return inquirer
         .prompt(intQuestionsArr)
-        .then()
 }
 
-function handleResponses() {
-    let newEmployee;
+function addNewMngr(data) {
+    let name = (answers["fullname"]);
+    let id = (answers["id"]);
+    let email = (answers["email"]);
+    let office = (answers["office"]);
+    let newMngr = new Manager(name, id, email, office);
+    employeeArr.push(newMngr);
+    console.log(employeeArr);
+}
 
+function addNewInt (data) {
+    let name = (answers["fullname"]);
+    let id = (answers["id"]);
+    let email = (answers["email"]);
+    let school = (answers["school"]);
+    let newInt = new Intern(name, id, email, school);
+    employeeArr.push(newInt);
+    console.log(employeeArr);
+}
 
+function addNewEng (data) {
+    let name = (answers["fullname"]);
+    let id = (answers["id"]);
+    let email = (answers["email"]);
+    let github = (answers["github"]);
+    let newEng = new Engineer(name, id, email, github);
+    employeeArr.push(newInt);
+    console.log(employeeArr);
+}
+
+function renderTeam() {
+    
 }
 
 function getTeam() {
-    const employeeArr = [];
-
     starterQuestions()
-        .then(function() {
-            if(role === "Manager") {
-                mngrQuestions()
-                    .then(function(){
-                        let newMngr = new Manager(fullname, id, email, role, office);
-                        employeeArr.push(newMngr);
-                        console.log(employeeArr);
-                    })
-            } else if(role === "Engineer") {
-                engQuestions()
-                .then(function(){
-                    let newEng = new Engineer(fullname, id, email, role, github);
-                    employeeArr.push(newEng);
-                    console.log(employeeArr);
-                })
-            } else if(role === "Intern") {
-                intQuestions()
-                .then(function(){
-                    let newInt = new Intern(fullname, id, email, role, school);
-                    employeeArr.push(newInt);
-                    console.log(employeeArr);
-                })
-            }
+        .then(answers => {
+            let role = (answers["role"]);
+            checkRole(role);
         })
 
 }
-
-getTeam();
-

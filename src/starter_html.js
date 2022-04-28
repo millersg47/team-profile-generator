@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const starterHtml = 
+
+`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,8 +19,4 @@
         </div>
       </nav>
     <div class = "container">
-        <div class = "row">
-
-        </div>
-    </div>
-</body>
+        <div class = "row">`
