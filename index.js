@@ -8,26 +8,27 @@ const Intern = require("./lib/Intern");
 function starterQuestions(){
     const questionsArr = [
     {
-        type: "input",
         name: "fullname",
         message: "What is the employee's full name?",
-    }, {
         type: "input",
+    }, {
         name: "id",
         message: "What is the employee's ID?",
-    }, {
         type: "input",
+    }, {
         name: "email",
         message: "What is the employee's email address?",
+        type: "input",
     }, {
-        type: "list",
         name: "role",
         message: "what is the employee's role?",
         choices: ["Manager", "Engineer", "Intern"],
+        type: "list",
     }];
 
-    inquirer
+    return inquirer
         .prompt(questionsArr)
+    
 }
 
 function mngrQuestions() {
