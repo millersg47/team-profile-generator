@@ -6,30 +6,31 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
 function starterQuestions(){
-    const questionsArr = [{
+    const questionsArr = [
+    {
         type: "input",
+        name: "fullname",
         message: "What is the employee's full name?",
-        name: "fullname"
     }, {
         type: "input",
+        name: "id",
         message: "What is the employee's ID?",
-        name: "id"
     }, {
         type: "input",
+        name: "email",
         message: "What is the employee's email address?",
-        name: "email"
     }, {
         type: "list",
+        name: "role",
         message: "what is the employee's role?",
         choices: ["Manager", "Engineer", "Intern"],
-        name: "role"
     }];
 
     inquirer
         .prompt(questionsArr)
 }
 
-function mangrQuestions() {
+function mngrQuestions() {
     const mngrQuestionsArr = [{
         type: "input",
         message: "What is the office number?",
@@ -78,7 +79,7 @@ function getTeam() {
     starterQuestions()
         .then(function() {
             if(role === "Manager") {
-                mangrQuestions()
+                mngrQuestions()
                     .then(function(){
                         let newMngr = new Manager(fullname, id, email, role, office);
                         employeeArr.push(newMngr);
