@@ -6,7 +6,7 @@ function engHtml(data) {
         <ul class="list-group list-group-flush">
             <li class="list-group-item" style="color: #3A2E39;">Employee ID: <span>${data.id}</span></li>
             <li class="list-group-item" style="color: #3A2E39;">Employee Email: <a href="mailto: ${data.email}" class="card-link">${data.email}</a></li>
-            <li class="list-group-item" style="color: #3A2E39;">Github: <a href="#" class="card-link">${data.github}</a></li>
+            <li class="list-group-item" style="color: #3A2E39;">Github: <a href="https://github.com/${data.github}" target="_blank" rel="noopener noreferrer" class="card-link">${data.github}</a></li>
         </ul>
     </div>
 </div>`
