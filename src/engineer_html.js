@@ -1,6 +1,5 @@
-const engHtml = 
-
-`<div class="card col-3 m-5 shadow-sm p-3 mb-5 rounded" style="width: 18rem; background-color: #f4d8cd;">
+function engHtml(data) {
+    return `<div class="card col-3 m-5 shadow-sm p-3 mb-5 rounded" style="width: 18rem; background-color: #f4d8cd;">
     <div class="card-body">
         <h5 class="card-title" style="color: #3A2E39;">${data.name}</h5>
         <h6 class="card-subtitle mb-2" style="color: #f15152">Engineer ⚙️</h6>
@@ -11,5 +10,9 @@ const engHtml =
         </ul>
     </div>
 </div>`
+
+}
+
+module.exports = engHtml;
 
             

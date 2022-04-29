@@ -14,7 +14,7 @@ const closingHtml = require("./src/closing_html");
 
 const employeeArr = [];
 
-getTeam();
+starterQuestions();
 
 function starterQuestions(){
     const questionsArr = [
@@ -39,21 +39,26 @@ function starterQuestions(){
 
     return inquirer
         .prompt(questionsArr)
+        .then(answers => {
+            let role = (answers["role"]);
+            checkRole(answers, role);
+        })
+
 }
 
-function checkRole(role) {
+function checkRole(answers, role) {
     if(role === "Manager") {
         mngrQuestions()
-            .then(addNewMngr(answers))
-            .then(addAnother())
+            .then((extra) => addNewMngr({...answers,...extra}))
+            .then(addAnother)
     } else if(role === "Engineer") {
         engQuestions()
-        .then(addNewEng(answers))
-        .then(addAnother())
+        .then((extra) => addNewEng({...answers,...extra}))
+        .then(addAnother)
     } else if(role === "Intern") {
         intQuestions()
-        .then(addNewInt(answers))
-        .then(addAnother())
+        .then((extra) => addNewInt({...answers,...extra}))
+        .then(addAnother)
     }
 }
 
@@ -66,10 +71,11 @@ function addAnother() {
     return inquirer
         .prompt(lastQuestionArr)
         .then((confirmed) => {
-            starterQuestions();
-        },
-        (cancelled) => {
-            renderTeam();
+            if(confirmed.teambuilder === true) {
+                starterQuestions();
+            } else {
+                renderTeam();
+            }
         })
 }
 
@@ -107,45 +113,50 @@ function intQuestions() {
         .prompt(intQuestionsArr)
 }
 
-function addNewMngr(data) {
+function addNewMngr(answers) {
     let name = (answers["fullname"]);
     let id = (answers["id"]);
     let email = (answers["email"]);
     let office = (answers["office"]);
     let newMngr = new Manager(name, id, email, office);
-    employeeArr.push(newMngr);
+    let mngrHtml = managerHtml(newMngr);
+    employeeArr.push(mngrHtml);
     console.log(employeeArr);
 }
 
-function addNewInt (data) {
+function addNewInt (answers) {
     let name = (answers["fullname"]);
     let id = (answers["id"]);
     let email = (answers["email"]);
     let school = (answers["school"]);
     let newInt = new Intern(name, id, email, school);
-    employeeArr.push(newInt);
+    let intHtml = internHtml(newInt);
+    employeeArr.push(intHtml);
     console.log(employeeArr);
 }
 
-function addNewEng (data) {
+function addNewEng (answers) {
     let name = (answers["fullname"]);
     let id = (answers["id"]);
     let email = (answers["email"]);
     let github = (answers["github"]);
     let newEng = new Engineer(name, id, email, github);
-    employeeArr.push(newInt);
+    let engHtml = engineerHtml(newEng);
+    employeeArr.push(engHtml);
     console.log(employeeArr);
 }
 
+//add functionality here to write HTML file and add sections for each team member in array
 function renderTeam() {
-    
-}
-
-function getTeam() {
-    starterQuestions()
-        .then(answers => {
-            let role = (answers["role"]);
-            checkRole(role);
-        })
+    let html = starterHtml + 
 
 }
+
+// function getTeam() {
+//     starterQuestions()
+//         .then(answers => {
+//             let role = (answers["role"]);
+//             checkRole(answers, role);
+//         })
+
+// }

@@ -20,3 +20,5 @@ const starterHtml =
       </nav>
     <div class = "container">
         <div class = "row">`
+
+module.exports = starterHtml;
