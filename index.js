@@ -148,15 +148,9 @@ function addNewEng (answers) {
 
 //add functionality here to write HTML file and add sections for each team member in array
 function renderTeam() {
-    let html = starterHtml + 
+    let html = starterHtml + employeeArr.join("\n") + closingHtml;
+    fs.writeFile("team-generator.html", html, (err) =>
+    err ? console.log(err) : console.log("Successfully created team html file!"));
 
 }
 
-// function getTeam() {
-//     starterQuestions()
-//         .then(answers => {
-//             let role = (answers["role"]);
-//             checkRole(answers, role);
-//         })
-
-// }

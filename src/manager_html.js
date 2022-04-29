@@ -6,7 +6,7 @@ return `<div class="card col-3 m-5 shadow-sm p-3 mb-5 rounded" style="width: 18r
         <ul class="list-group list-group-flush">
             <li class="list-group-item" style="color: #3A2E39;">Employee ID: <span>${data.id}</span></li>
             <li class="list-group-item" style="color: #3A2E39;">Employee Email: <a href="mailto:${data.email}" class="card-link">${data.email}</a></li>
-            <li class="list-group-item" style="color: #3A2E39;">Office Number: <span>${data.office}</span></li>
+            <li class="list-group-item" style="color: #3A2E39;">Office Number: <span>${data.officeNo}</span></li>
         </ul>
     </div>
 </div>`
