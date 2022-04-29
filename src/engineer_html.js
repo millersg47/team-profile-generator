@@ -5,7 +5,7 @@ function engHtml(data) {
         <h6 class="card-subtitle mb-2" style="color: #f15152">Engineer ⚙️</h6>
         <ul class="list-group list-group-flush">
             <li class="list-group-item" style="color: #3A2E39;">Employee ID: <span>${data.id}</span></li>
-            <li class="list-group-item" style="color: #3A2E39;">Employee Email: <a href="mailto: ${data.email}" class="card-link"><${data.email}/a></li>
+            <li class="list-group-item" style="color: #3A2E39;">Employee Email: <a href="mailto: ${data.email}" class="card-link">${data.email}</a></li>
             <li class="list-group-item" style="color: #3A2E39;">Github: <a href="#" class="card-link">${data.github}</a></li>
         </ul>
     </div>
