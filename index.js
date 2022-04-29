@@ -121,7 +121,6 @@ function addNewMngr(answers) {
     let newMngr = new Manager(name, id, email, office);
     let mngrHtml = managerHtml(newMngr);
     employeeArr.push(mngrHtml);
-    console.log(employeeArr);
 }
 
 function addNewInt (answers) {
@@ -132,7 +131,6 @@ function addNewInt (answers) {
     let newInt = new Intern(name, id, email, school);
     let intHtml = internHtml(newInt);
     employeeArr.push(intHtml);
-    console.log(employeeArr);
 }
 
 function addNewEng (answers) {
@@ -143,13 +141,12 @@ function addNewEng (answers) {
     let newEng = new Engineer(name, id, email, github);
     let engHtml = engineerHtml(newEng);
     employeeArr.push(engHtml);
-    console.log(employeeArr);
 }
 
 //add functionality here to write HTML file and add sections for each team member in array
 function renderTeam() {
     let html = starterHtml + employeeArr.join("\n") + closingHtml;
-    fs.writeFile("team-generator.html", html, (err) =>
+    fs.writeFile("./dist/team-generator.html", html, (err) =>
     err ? console.log(err) : console.log("Successfully created team html file!"));
 
 }
