@@ -41,8 +41,8 @@ function starterQuestions(){
         .prompt(questionsArr)
         .then(answers => {
             let role = (answers["role"]);
-            checkRole(answers, role);
-        })
+            checkRole(answers, role);}
+            )
 
 }
 
